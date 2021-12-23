@@ -1,25 +1,37 @@
-# Capstone Project
-
-Step 0:  Inspect the archtecture 
+## Capstone Project
 
 
+Step 0:  Inspect the archtecture 00:02:23
+Step 1: Create a Cloud9 IDE 00:05:49
+Step 2: Get the Project Assets 00:07:51
+Step 3: Install a LAMP web server on CLoud9 IDE 00:08:49
+Step 4: Create a MySQL RDS database instance 00:13:15
+Step 5: Create an Application Load Balancer 00:20:53
+Step 6: Importing the data into the RDS database 00:25:18
 
-Step 1: Create a Cloud9 IDE
-Set SG and Assign the App role to it
-cd ~/environment
+#Step 0:  Inspect the archtecture 
+- check vpc 
+- check subnets 
+- AMI 
 
 
-Step 2: Get the Project Assets 
+# Step 1: Create a Cloud9 IDE
 
-wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-200-ACACAD-20-EN/capstone-project/Example.zip
 
+
+
+# Step 2: Get the Project Assets 
+
+ 
+'''
 unzip Example.zip -d /var/www/html/
+'''
 
-Step 3: Install a LAMP web server on Amazon Linux 2
+# Step 3: Install a LAMP web server on Amazon Linux 2
 
-LAMP (Linux, Apache HTTP server, MySQL database, and PHP) stack
+### LAMP (Linux, Apache HTTP server, MySQL database, and PHP) stack
 
-
+''' sh
 sudo yum -y update
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
 
@@ -28,48 +40,57 @@ sudo systemctl start httpd
 
 sudo systemctl enable httpd
 sudo systemctl is-enabled httpd
+'''
 
 
-chown apache:root /var/www/html/rds.conf.php
 
 
-Open port 80 in Cloud9
-Get the cloud9 EC2 public instance IP and test that you can access the website 
+- Open port 80 in Cloud9
+- Get the cloud9 EC2 public instance IP and test that you can access the website 
 
-Step 4: Create a MySQL RDS database instance 
+# Step 4: Create a MySQL RDS database instance 
 with the following specifications.
-Create a db subnet group 
-Databasetype: MySQL
- Template: Dev/Test
- DBinstanceidentifier: Example
- DB instance size: db.t3.micro
- Storage type: General Purpose (SSD)
- Allocatedstorage: 20GiB
- Storageautoscaling: Enabled
- Standbyinstance: Enabled
- Virtualprivatecloud: ExampleVPC
- Databaseauthenticationmethod: Passwordauthentication 
- Initialdatabasename: exampledb
- Enhancedmonitoring: Disabled
-Step 5: Create an ALB
+- [ ] Create a db subnet group 
+- [ ] Databasetype: MySQL
+- [ ] Template: Dev/Test
+ - [ ] DBinstanceidentifier: Example
+ - [ ] DB instance size: db.t3.micro
+ - [ ] Storage type: General Purpose (SSD)
+ - [ ] Allocatedstorage: 20GiB
+ - [ ] Storageautoscaling: Enabled
+ - [ ] Standbyinstance: Enabled
+- [ ]  Virtualprivatecloud: ExampleVPC
+- [ ]  Databaseauthenticationmethod: Passwordauthentication 
+- [ ]  Initialdatabasename: exampledb
+- [ ]  Enhancedmonitoring: Disabled
 
- Step 6: Importing the data into the RDS database instance from CLoud9 or by accessing the web instance via bastion host
- get the SQLDump file:
- wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-200-ACACAD-20-EN/capstone-project/Countrydatadump.sql
- Add Cloud9 to SG of the RDS 
- connect to the RDS database, run this command:
- mysql -u admin -p --host <rds-endpoint> 
- mysql -u admin -p --host example.chtaacebezpy.us-east-1.rds.amazonaws.com
+# Step 5: Create an Application Load Balancer
+- Create target group 
+- Create an auto scaling group 
+- Lunch Web Instances in the private subnet
+# Step 6: Importing the data into the RDS database
+ _Importing the data into the RDS database instance from CLoud9 or by accessing the web instance via bastion host
+ - get the SQLDump file:
+ 
 
- mysql -u admin -p --host <rds-endpoint> < Countrydatadump.sql     
+ -- connect to the RDS database, run this command:
+'''
+mysql -u admin -p --host <rds-endpoint>
+ '''
+ 
+ 
+ 
+  
 
-mysql -u admin -p exampledb --host example.chtaacebezpy.us-east-1.rds.amazonaws.com  < Countrydatadump.sql       
+''' 
+mysql -u admin -p exampledb --host <rds-endpoint>  < Countrydatadump.sql       
+                                                                        '''
 
 Test data was imported 
 use exampledb;	
 show tables; 
 select * from countrydata_final; 
-Step 7: configure the php  app to use the RDS 
+# Step 7: configure the php  app to use the RDS 
 look to get-parameters.php 
 /example/endpoint example.chtaacebezpy.us-east-1.rds.amazonaws.com
 
