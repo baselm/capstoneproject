@@ -2,6 +2,10 @@
 
 
  <a href="https://youtu.be/AwH6drwfuAU">Youtube video</a>
+ 
+ [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/AwH6drwfuAU/0.jpg)](https://www.youtube.com/watch?v=AwH6drwfuAU)
+
+
 ### Summary of the tasks:
 - Step 0:  Inspect the archtecture 00:02:23
 - Step 1: Create a Cloud9 IDE 00:05:49
@@ -13,9 +17,10 @@
 - Step 7: Configure the system parameters in Parameter Store Systems Manager 00:38:20
 
 # Step 0:  Inspect the archtecture 
-- check the example VPC 
-- check the subnets 
-- Check the AMI  
+- Inspect the example VPC. 
+- Inspect the subnets. 
+- Inspect the Security Groups.
+- Inspect the AMI.  
 
 
 # Step 1: Create a Cloud9 IDE
@@ -24,11 +29,11 @@
 
 
 # Step 2: Get the Project Assets 
-1. Clone the repo
-   ```sh
+1. Clone the repository:
+```sh
    git clone https://github.com/baselm/capstoneproject.git
    ```
-2. Extract the files to the Apache folder 
+2. Extract the files to the Apache www folder:
 ```sh
    unzip Example.zip -d /var/www/html/
    ```
