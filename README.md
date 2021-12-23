@@ -1,18 +1,20 @@
 ## Capstone Project
 
 
-Step 0:  Inspect the archtecture 00:02:23
-Step 1: Create a Cloud9 IDE 00:05:49
-Step 2: Get the Project Assets 00:07:51
-Step 3: Install a LAMP web server on CLoud9 IDE 00:08:49
-Step 4: Create a MySQL RDS database instance 00:13:15
-Step 5: Create an Application Load Balancer 00:20:53
-Step 6: Importing the data into the RDS database 00:25:18
+ <a href="https://youtu.be/AwH6drwfuAU">Youtube video</a>
+### Summary of the tasks:
+- Step 0:  Inspect the archtecture 00:02:23
+- Step 1: Create a Cloud9 IDE 00:05:49
+- Step 2: Get the Project Assets 00:07:51
+- Step 3: Install a LAMP web server on CLoud9 IDE 00:08:49
+- Step 4: Create a MySQL RDS database instance 00:13:15
+- Step 5: Create an Application Load Balancer 00:20:53
+- Step 6: Importing the data into the RDS database 00:25:18
 
-#Step 0:  Inspect the archtecture 
-- check vpc 
-- check subnets 
-- AMI 
+# Step 0:  Inspect the archtecture 
+- check the example VPC 
+- check the subnets 
+- Check the AMI  
 
 
 # Step 1: Create a Cloud9 IDE
@@ -21,17 +23,17 @@ Step 6: Importing the data into the RDS database 00:25:18
 
 
 # Step 2: Get the Project Assets 
-
- 
-'''
+'''sh
 unzip Example.zip -d /var/www/html/
 '''
+
+
 
 # Step 3: Install a LAMP web server on Amazon Linux 2
 
 ### LAMP (Linux, Apache HTTP server, MySQL database, and PHP) stack
 
-''' sh
+'''sh
 sudo yum -y update
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
 
@@ -73,23 +75,25 @@ with the following specifications.
  - get the SQLDump file:
  
 
- -- connect to the RDS database, run this command:
-'''
+ - connect to the RDS database, run this command:
+'''sh
 mysql -u admin -p --host <rds-endpoint>
  '''
  
- 
+ '''sh
+ use exampledb;	
+show tables; 
+select * from countrydata_final; 
+ '''
  
   
 
-''' 
+'''sh
 mysql -u admin -p exampledb --host <rds-endpoint>  < Countrydatadump.sql       
-                                                                        '''
+'''
+# Test the ALB 
+- Test data was imported 
 
-Test data was imported 
-use exampledb;	
-show tables; 
-select * from countrydata_final; 
 # Step 7: configure the php  app to use the RDS 
 look to get-parameters.php 
 /example/endpoint example.chtaacebezpy.us-east-1.rds.amazonaws.com
