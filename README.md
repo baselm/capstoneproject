@@ -10,6 +10,7 @@
 - Step 4: Create a MySQL RDS database instance 00:13:15
 - Step 5: Create an Application Load Balancer 00:20:53
 - Step 6: Importing the data into the RDS database 00:25:18
+- Step 7: Configure the system parameters in Parameter Store Systems Manager 00:38:20
 
 # Step 0:  Inspect the archtecture 
 - check the example VPC 
@@ -23,17 +24,20 @@
 
 
 # Step 2: Get the Project Assets 
-'''sh
-unzip Example.zip -d /var/www/html/
-'''
-
-
-
+1. Clone the repo
+   ```sh
+   git clone https://github.com/baselm/capstoneproject.git
+   ```
+2. Extract the files to the Apache folder 
+```sh
+   unzip Example.zip -d /var/www/html/
+   ```
+   
 # Step 3: Install a LAMP web server on Amazon Linux 2
 
 ### LAMP (Linux, Apache HTTP server, MySQL database, and PHP) stack
 
-'''sh
+```sh
 sudo yum -y update
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
 
@@ -42,13 +46,13 @@ sudo systemctl start httpd
 
 sudo systemctl enable httpd
 sudo systemctl is-enabled httpd
-'''
+```
 
 
 
 
-- Open port 80 in Cloud9
-- Get the cloud9 EC2 public instance IP and test that you can access the website 
+- Open port 80 from the security group of the Cloud9 EC2 instance
+- Get the cloud9 EC2 public instance IP address and test that you can access the website 
 
 # Step 4: Create a MySQL RDS database instance 
 with the following specifications.
@@ -72,34 +76,40 @@ with the following specifications.
 - Lunch Web Instances in the private subnet
 # Step 6: Importing the data into the RDS database
  _Importing the data into the RDS database instance from CLoud9 or by accessing the web instance via bastion host
- - get the SQLDump file:
+ 1. get the SQLDump file:
  
 
- - connect to the RDS database, run this command:
-'''sh
+ 2. connect to the RDS database, run this command:
+```sh
 mysql -u admin -p --host <rds-endpoint>
- '''
+ ```
+ 3. Test that you can access the RDS DB 
+ ```sh
+ use exampledb;	
+show tables; 
+
+ ```
  
- '''sh
+  
+4. Import the data into the RDS database.
+```sh
+mysql -u admin -p exampledb --host <rds-endpoint>  < Countrydatadump.sql       
+```
+# Test the ALB 
+- Test data was imported 
+```sh
  use exampledb;	
 show tables; 
 select * from countrydata_final; 
- '''
- 
-  
+ ```
 
-'''sh
-mysql -u admin -p exampledb --host <rds-endpoint>  < Countrydatadump.sql       
-'''
-# Test the ALB 
-- Test data was imported 
+# Step 7: Configure the system parameters in Parameter Store Systems Manager
 
-# Step 7: configure the php  app to use the RDS 
-look to get-parameters.php 
-/example/endpoint example.chtaacebezpy.us-east-1.rds.amazonaws.com
+Add the following parameters to the Parameter Store and set the correct values:
+1. /example/endpoint 
 
-/example/username admin 
-/example/password lab-password 
-/example/database exampledb
+2. /example/username   
+3. /example/password  
+4. /example/database exampledb
 
 
