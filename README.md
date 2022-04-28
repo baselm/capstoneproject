@@ -32,9 +32,12 @@
 1. Clone the repository:
 ```sh
    git clone https://github.com/baselm/capstoneproject.git
+   or 
+   wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-200-ACACAD-20-EN/capstone-project/Example.zip
    ```
 2. Extract the files to the Apache www folder:
 ```sh
+   chown ec2-user Example.zip
    unzip Example.zip -d /var/www/html/
    ```
    
