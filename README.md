@@ -44,6 +44,7 @@
 # Step 3: Install a LAMP web server on Amazon Linux 2
 
 ### LAMP (Linux, Apache HTTP server, MySQL database, and PHP) stack
+Original tutorial for LAMP Stack <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html'> Tutorial: Install a LAMP web server on Amazon Linux 2 </a>
 
 ```sh
 sudo yum -y update
