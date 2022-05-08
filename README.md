@@ -24,11 +24,17 @@
 
 
 # Step 1: Create a Cloud9 IDE
-
+1. Search `Cloud9` in AWS Management Console
+2. Click on `Create Environment`
+3. Name is `Project IDE` (You can give any appropriate name need not be same)
+4. VPC : Example VPC
+5. Subnet : Public Subnet 2
+6. Next and launch Cloud9
 
 
 
 # Step 2: Get the Project Assets 
+In Cloud9 Terminal  
 1. Clone the repository:
 ```sh
    git clone https://github.com/baselm/capstoneproject.git
@@ -66,18 +72,18 @@ sudo systemctl is-enabled httpd
 # Step 4: Create a MySQL RDS database instance 
 with the following specifications.
 - [ ] Create a db subnet group 
-- [ ] Databasetype: MySQL
+- [ ] Database type: MySQL
 - [ ] Template: Dev/Test
- - [ ] DBinstanceidentifier: Example
+ - [ ] DB instance identifier(Database ID): Example
  - [ ] DB instance size: db.t3.micro
  - [ ] Storage type: General Purpose (SSD)
- - [ ] Allocatedstorage: 20GiB
- - [ ] Storageautoscaling: Enabled
- - [ ] Standbyinstance: Enabled
-- [ ]  Virtualprivatecloud: ExampleVPC
-- [ ]  Databaseauthenticationmethod: Passwordauthentication 
-- [ ]  Initialdatabasename: exampledb
-- [ ]  Enhancedmonitoring: Disabled
+ - [ ] Allocated storage: 20GiB
+ - [ ] Storage autoscaling: Enabled
+ - [ ] Standby instance: Enabled
+- [ ]  Virtual private cloud: ExampleVPC
+- [ ]  Database authentication method: Password authentication 
+- [ ]  Initial database name: exampledb
+- [ ]  Enhanced monitoring: Disabled
 
 # Step 5: Create an Application Load Balancer
 - Create target group 
@@ -94,7 +100,7 @@ mysql -u admin -p --host <rds-endpoint>
  ```
  3. Test that you can access the RDS DB 
  ```sh
- use exampledb;	
+use exampledb;	
 show tables; 
 
  ```
@@ -107,7 +113,7 @@ mysql -u admin -p exampledb --host <rds-endpoint>  < Countrydatadump.sql
 # Test the ALB 
 - Test data was imported 
 ```sh
- use exampledb;	
+use exampledb;	
 show tables; 
 select * from countrydata_final; 
  ```
@@ -116,9 +122,6 @@ select * from countrydata_final;
 
 Add the following parameters to the Parameter Store and set the correct values:
 1. /example/endpoint 
-
 2. /example/username   
 3. /example/password  
-4. /example/database exampledb
-
-
+4. /example/database
